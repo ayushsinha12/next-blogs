@@ -21,9 +21,26 @@ export async function getStaticProps({ params }) {
 
   if (userDoc) {
     const postRef = userDoc.ref.collection('posts').doc(slug);
-    post = postToJSON(await postRef.get());
+    const postDoc = await postRef.get();
 
-    path = postRef.path;
+    if (postDoc.exists) {
+      post = postToJSON(postDoc);
+
+      console.log('Fetched Post:', post);
+
+      if (!post.createdAt) {
+        console.error(`Post "${slug}" is missing "createdAt"`);
+        return {
+          notFound: true,
+        };
+      }
+
+      path = postRef.path;
+    } else {
+      console.error(`Post "${slug}" not found.`);
+    }
+  } else {
+    console.error(`User "${username}" not found.`);
   }
 
   return {
