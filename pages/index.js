@@ -1,12 +1,19 @@
 import PostFeed from '../components/PostFeed';
 import Loader from '../components/Loader';
 import { firestore, fromMillis, postToJSON } from '../lib/firebase';
-
 import { useState } from 'react';
 
 // Max post to query per page
 const LIMIT = 1;
 
+/**
+ * getServerSideProps
+ * 
+ * Fetches the initial set of posts for server-side rendering.
+ * 
+ * @param {Object} context - The context object provided by Next.js.
+ * @returns {Object} - Props containing the fetched posts.
+ */
 export async function getServerSideProps(context) {
   console.log('Starting getServerSideProps...');
   const postsQuery = firestore
@@ -38,6 +45,13 @@ export async function getServerSideProps(context) {
   };
 }
 
+/**
+ * Home Component
+ * 
+ * Displays the main page with a feed of posts and a "Load more" button for pagination.
+ * 
+ * @param {Object} props - Props containing the initial posts.
+ */
 export default function Home(props) {
   console.log('Initial posts from props:', props.posts);
   const [posts, setPosts] = useState(props.posts || []);
@@ -47,6 +61,10 @@ export default function Home(props) {
   if (!posts || posts.length === 0) {
     console.warn('Posts state is empty or undefined.');
   }
+  
+  /**
+   * Fetches more posts for pagination.
+   */
   const getMorePosts = async () => {
     setLoading(true);
     

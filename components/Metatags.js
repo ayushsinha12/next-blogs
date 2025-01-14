@@ -1,5 +1,15 @@
 import Head from 'next/head';
 
+/**
+ * Metatags Component
+ * 
+ * Generates meta tags for SEO and social media sharing.
+ * 
+ * @param {Object} props - Component props
+ * @param {string} [props.title='The Full Next.js + Firebase Course'] - Page title
+ * @param {string} [props.description='A complete Next.js + Firebase course by Fireship.io'] - Page description
+ * @param {string} [props.image='https://fireship.io/courses/react-next-firebase/img/featured.png'] - Image URL for sharing
+ */
 export default function Metatags({
   title = 'The Full Next.js + Firebase Course',
   description = 'A complete Next.js + Firebase course by Fireship.io',

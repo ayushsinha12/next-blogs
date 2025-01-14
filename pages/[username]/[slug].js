@@ -6,7 +6,12 @@ import HeartButton from '../../components/HeartButton';
 import AuthCheck from '../../components/AuthCheck';
 import Link from 'next/link';
 
-
+/**
+ * Fetch static props for a post based on username and slug.
+ * 
+ * @param {Object} params - Route parameters containing username and slug.
+ * @returns {Object} - Static props including the post data and Firestore path.
+ */
 export async function getStaticProps({ params }) {
   const { username, slug } = params;
   const userDoc = await getUserWithUsername(username);
@@ -27,6 +32,11 @@ export async function getStaticProps({ params }) {
   };
 }
 
+/**
+ * Generate static paths for all posts.
+ * 
+ * @returns {Object} - Paths for static generation and fallback configuration.
+ */
 export async function getStaticPaths() {
   // Improve my using Admin SDK to select empty docs
   const snapshot = await firestore.collectionGroup('posts').get();
@@ -39,15 +49,18 @@ export async function getStaticPaths() {
   });
 
   return {
-    // must be in this format:
-    // paths: [
-    //   { params: { username, slug }}
-    // ],
     paths,
     fallback: 'blocking',
   };
 }
 
+/**
+ * Post Page Component
+ * 
+ * Displays the content of a single post, including real-time updates and the heart button.
+ * 
+ * @param {Object} props - Props containing the post data and Firestore path.
+ */
 export default function Post(props) {
     const postRef = firestore.doc(props.path);
     const [realtimePost] = useDocumentData(postRef);

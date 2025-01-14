@@ -11,6 +11,11 @@ import { useCollection } from 'react-firebase-hooks/firestore';
 import kebabCase from 'lodash.kebabcase';
 import toast from 'react-hot-toast';
 
+/**
+ * AdminPostsPage Component
+ * 
+ * Main admin page for managing and creating posts.
+ */
 export default function AdminPostsPage(props) {
   return (
     <main>
@@ -22,6 +27,11 @@ export default function AdminPostsPage(props) {
   );
 }
 
+/**
+ * PostList Component
+ * 
+ * Fetches and displays a list of posts for the authenticated user.
+ */
 function PostList() {
   const ref = firestore.collection('users').doc(auth.currentUser.uid).collection('posts');
   const query = ref.orderBy('createdAt');
@@ -37,6 +47,11 @@ function PostList() {
   );
 }
 
+/**
+ * CreateNewPost Component
+ * 
+ * Form for creating a new post with a title and default content.
+ */
 function CreateNewPost() {
   const router = useRouter();
   const { username } = useContext(UserContext);
@@ -71,7 +86,7 @@ function CreateNewPost() {
 
     toast.success('Post created!')
 
-    // Imperative navigation after doc is set
+    // Important navigation after doc is set
     router.push(`/admin/${slug}`);
 
   };

@@ -1,5 +1,10 @@
 import Link from 'next/link';
 
+/**
+ * Custom404 Component
+ * 
+ * Displays a custom 404 error page with a playful GIF and a button to navigate home.
+ */
 export default function Custom404() {
   return (
     <main>

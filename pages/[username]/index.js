@@ -2,6 +2,12 @@ import { getUserWithUsername, postToJSON } from '../../lib/firebase';
 import UserProfile from '../../components/UserProfile';
 import PostFeed from '../../components/PostFeed';
 
+/**
+ * Fetch server-side props for a user profile page.
+ * 
+ * @param {Object} query - Query object containing the username.
+ * @returns {Object} - Props containing the user data and published posts, or a 404 response.
+ */
 export async function getServerSideProps({ query }) {
   const { username } = query;
 
@@ -33,6 +39,13 @@ export async function getServerSideProps({ query }) {
   };
 }
 
+/**
+ * UserProfilePage Component
+ * 
+ * Displays a user's profile and their published posts.
+ * 
+ * @param {Object} props - Props containing the user data and posts.
+ */
 export default function UserProfilePage({ user, posts }) {
   return (
     <main>

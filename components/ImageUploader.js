@@ -2,7 +2,12 @@ import { useState } from 'react';
 import { auth, storage, STATE_CHANGED } from '../lib/firebase';
 import Loader from './Loader';
 
-// Uploads images to Firebase Storage
+/**
+ * ImageUploader Component
+ * 
+ * Allows users to upload images to Firebase Storage, showing upload progress
+ * and providing a download URL upon completion.
+ */
 export default function ImageUploader() {
   const [uploading, setUploading] = useState(false);
   const [progress, setProgress] = useState(0);

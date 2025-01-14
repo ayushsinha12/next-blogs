@@ -1,3 +1,11 @@
+/**
+ * UserProfile Component
+ * 
+ * Displays a user's profile information, including their avatar, username, and display name.
+ * 
+ * @param {Object} props - Component props
+ * @param {Object} props.user - User object containing photoURL, username, and displayName
+ */
 export default function UserProfile({ user }) {
     return (
         <div className="box-center">

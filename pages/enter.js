@@ -3,13 +3,16 @@ import { useEffect, useState, useCallback, useContext } from 'react';
 import debounce from 'lodash.debounce';
 import { auth, firestore, googleAuthProvider } from '../lib/firebase';
 
-
+/**
+ * Enter Page Component
+ * 
+ * Displays different UI based on user authentication and username state:
+ * 1. SignInButton if the user is signed out.
+ * 2. UsernameForm if the user is signed in but missing a username.
+ * 3. SignOutButton if the user is signed in and has a username.
+ */
 export default function Enter(props) {
     const { user, username } = useContext(UserContext)
-
-  // 1. user signed out <SignInButton />
-  // 2. user signed in, but missing username <UsernameForm />
-  // 3. user signed in, has username <SignOutButton />
   return (
     <main>
       {user ? 
@@ -21,7 +24,11 @@ export default function Enter(props) {
   );
 }
 
-// Sign in with Google button
+/**
+ * SignInButton Component
+ * 
+ * Provides a button for users to sign in with Google.
+ */
 function SignInButton() {
   const signInWithGoogle = async () => {
     await auth.signInWithPopup(googleAuthProvider);
@@ -34,12 +41,20 @@ function SignInButton() {
   );
 }
 
-// Sign out button
+/**
+ * SignOutButton Component
+ * 
+ * Provides a button for users to sign out.
+ */
 function SignOutButton() {
   return <button onClick={() => auth.signOut()}>Sign Out</button>;
 }
 
-// Username form
+/**
+ * UsernameForm Component
+ * 
+ * Allows users to set their username and validates it against Firestore.
+ */
 function UsernameForm() {
     const [formValue, setFormValue] = useState('');
     const [isValid, setIsValid] = useState(false);
@@ -47,6 +62,7 @@ function UsernameForm() {
   
     const { user, username } = useContext(UserContext);
   
+    // Submit the username to Firestore
     const onSubmit = async (e) => {
       e.preventDefault();
   
@@ -61,13 +77,12 @@ function UsernameForm() {
   
       await batch.commit();
     };
-  
+    // Validate the username as it is typed
     const onChange = (e) => {
       // Force form value typed in form to match correct format
       const val = e.target.value.toLowerCase();
       const re = /^(?=[a-zA-Z0-9._]{3,15}$)(?!.*[_.]{2})[^_.].*[^_.]$/;
   
-      // Only set form value if length is < 3 OR it passes regex
       if (val.length < 3) {
         setFormValue(val);
         setLoading(false);

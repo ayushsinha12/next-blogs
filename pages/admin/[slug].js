@@ -12,6 +12,11 @@ import ReactMarkdown from 'react-markdown';
 import Link from 'next/link';
 import toast from 'react-hot-toast';
 
+/**
+ * AdminPostEdit Page
+ * 
+ * Renders the post editor interface for admin users, protected by AuthCheck.
+ */
 export default function AdminPostEdit(props) {
   return (
     <AuthCheck>
@@ -20,6 +25,11 @@ export default function AdminPostEdit(props) {
   );
 }
 
+/**
+ * PostManager Component
+ * 
+ * Manages the editing and previewing of a single post.
+ */
 function PostManager() {
   const [preview, setPreview] = useState(false);
 
@@ -53,6 +63,11 @@ function PostManager() {
   );
 }
 
+/**
+ * PostForm Component
+ * 
+ * Handles post editing with validation, previewing, and image uploads.
+ */
 function PostForm({ defaultValues, postRef, preview }) {
   const { register, handleSubmit, reset, watch, formState, errors } = useForm({ defaultValues, mode: 'onChange' });
 

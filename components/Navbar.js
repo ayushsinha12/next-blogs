@@ -2,7 +2,11 @@ import Link from 'next/link';
 import { useContext } from 'react';
 import { UserContext } from '../lib/context';
 
-// Top navbar
+/**
+ * Navbar Component
+ * 
+ * Displays the top navigation bar with links and actions based on the user's authentication status.
+ */
 export default function Navbar() {
 
   const { user, username } = useContext(UserContext)

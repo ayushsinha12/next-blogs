@@ -1,8 +1,16 @@
 import Link from 'next/link';
 import ReactMarkdown from 'react-markdown';
 
-// UI component for main post content
+/**
+ * PostContent Component
+ * 
+ * Displays the main UI content of a post, including the title, author, creation date, and body content.
+ * 
+ * @param {Object} props - Component props
+ * @param {Object} props.post - The post object containing title, username, content, and createdAt
+ */
 export default function PostContent({ post }) {
+  // Convert the createdAt timestamp to a Date object
   const createdAt = typeof post?.createdAt === 'number' ? new Date(post.createdAt) : post.createdAt.toDate();
 
   return (

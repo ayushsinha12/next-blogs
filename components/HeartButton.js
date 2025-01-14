@@ -1,7 +1,14 @@
 import { firestore, auth, increment } from '../lib/firebase';
 import { useDocument } from 'react-firebase-hooks/firestore';
 
-// Allows user to heart or like a post
+/**
+ * Heart Component
+ * 
+ * Allows a user to "heart" or "like" a post, updating the database to reflect the action.
+ * 
+ * @param {Object} props - Component props
+ * @param {Object} props.postRef - Firestore reference to the post document
+ */
 export default function Heart({ postRef }) {
   // Listen to heart document for currently logged in user
   const heartRef = postRef.collection('hearts').doc(auth.currentUser.uid);
@@ -28,6 +35,7 @@ export default function Heart({ postRef }) {
     await batch.commit();
   };
 
+  // Render buttons based on whether the user has hearted the post
   return heartDoc?.exists ? (
     <button onClick={removeHeart}>💔 Unheart</button>
   ) : (
