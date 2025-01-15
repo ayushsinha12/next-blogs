@@ -25,7 +25,8 @@
       }
     ],
     "module": "esnext",
-    "resolveJsonModule": true
+    "resolveJsonModule": true,
+    "incremental": true
   },
   "include": [
     "**/*.js",
