@@ -18,5 +18,5 @@ export default function AuthCheck(props) {
 
   return username 
     ? props.children // Render children if user is authenticated
-    : props.fallback || <Link href="/signin">You must be signed in</Link>; // Render fallback or default sign-in link
+    : props.fallback || <Link href="/enter">You must be signed in</Link>; // Render fallback or default sign-in link
 }
