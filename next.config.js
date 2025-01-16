@@ -1,6 +1,8 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-    // Add your Next.js config options here
-  };
-  
-  module.exports = nextConfig;
+  env: {
+    NEXT_PUBLIC_REDIRECT_URI: "https://next-blogs-gamma.vercel.app/enter",
+  },
+};
+
+module.exports = nextConfig;
