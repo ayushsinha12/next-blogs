@@ -8,7 +8,7 @@ Next Blogging is a full-stack social blogging platform built with Next.js, React
   <img src="bloggingFeed.png" width="666" height="383">
 </div>
 <p align="center">
-  Above is the home page.
+  Above is an example home page.
 </p>
 <div align="center">
   <img src="bloggingPost.png" width="666" height="383">
